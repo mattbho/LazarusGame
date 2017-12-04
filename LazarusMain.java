@@ -30,4 +30,7 @@ public class LazarusMain{
         
         frame.start();
     }
+    public static GameFrame getFrame(){
+        return frame;
+    }
 }
