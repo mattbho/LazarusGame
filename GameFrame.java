@@ -26,7 +26,7 @@ public class GameFrame extends JApplet implements Runnable{
             Background = ImageIO.read(new File("Resource/Background.bmp"));            
             cardboard = ImageIO.read(new File("Resource/CardBox.gif"));
             wood = ImageIO.read(new File("Resource/WoodBox.gif"));
-            stone = ImageIO.read(new File("Resource/StoneBoc.gif"));
+            stone = ImageIO.read(new File("Resource/StoneBox.gif"));
             metal = ImageIO.read(new File("Resource/MetalBox.gif"));
         }catch(Exception e){}  
         

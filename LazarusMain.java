@@ -15,8 +15,9 @@ import javax.swing.JFrame;
  * @author Jack
  */
 public class LazarusMain{
-    private static GameFrame frame;
+   private static final GameFrame frame = new GameFrame();
     public static void main(String arg[]){
+
         frame.init();
 
         JFrame f = new JFrame("LazarusGame");
