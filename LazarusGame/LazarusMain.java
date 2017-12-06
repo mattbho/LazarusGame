@@ -1,3 +1,4 @@
+package LazarusGame;
 
 import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
