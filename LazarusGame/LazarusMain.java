@@ -16,7 +16,9 @@ import javax.swing.JFrame;
  * @author Jack
  */
 public class LazarusMain{
-   private static final GameFrame frame = new GameFrame();
+    private static final int x =640;
+    private static final int y =480;
+    private static final GameFrame frame = new GameFrame();
     public static void main(String arg[]){
 
         frame.init();
@@ -34,5 +36,11 @@ public class LazarusMain{
     }
     public static GameFrame getFrame(){
         return frame;
+    }
+    public static int getX(){
+        return x;
+    }
+    public static int getY(){
+        return y;
     }
 }

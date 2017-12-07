@@ -1,10 +1,12 @@
 package LazarusGame.Objects;
 
 
+import LazarusGame.LazarusMain;
 import java.awt.*;
 import java.awt.image.ImageObserver;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Random;
 
 public abstract class GameObj implements Observer {
     protected Image img;
@@ -16,17 +18,16 @@ public abstract class GameObj implements Observer {
     public GameObj(int x, int y, int speed){
         this.x = x;
         this.y = y;
-        this.width = img.getWidth(null);
-        this.height = img.getHeight(null);
         this.speed = speed;
 
     }
-    public GameObj(Image[] img, int x, int y){
-        this.imgArray = img;
-        this.x = x;
+    
+    public GameObj(Image img, int y, Random gen){
+        this.img = img;
+        this.x = gen.nextInt()%(LazarusMain.getX()-40);
         this.y = y;
-        this.width = img[0].getWidth(null);
-        this.height = img[0].getHeight(null);
+        this.width = img.getWidth(null);
+        this.height = img.getHeight(null);
     }
     public void update(Observable o, Object arg){
 
