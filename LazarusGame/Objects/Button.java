@@ -7,7 +7,9 @@ package LazarusGame.Objects;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
+import java.util.Observable;
 import java.util.Random;
 
 /**
@@ -15,10 +17,11 @@ import java.util.Random;
  * @author Jack
  */
 public class Button extends GameObj{
-    public Button(Image img, int y, Random gen){
-        super(img,y,gen);
+    public Button(BufferedImage[] img, int x, int y){
+        super(img,x,y);
     }
-    public void draw(ImageObserver obs, Graphics2D g2){
-        g2.drawImage(img, x, y, obs);
+    @Override
+    public void update(Observable o, Object arg){
+
     }
 }

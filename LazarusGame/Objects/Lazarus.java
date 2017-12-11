@@ -8,6 +8,7 @@ package LazarusGame.Objects;
 import LazarusGame.GameEvent;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Observable;
 import javax.imageio.ImageIO;
@@ -28,10 +29,10 @@ public class Lazarus extends GameObj{
             jumpRight = ImageIO.read(new File("Resource/Lazarus_jump_right_strip7.png"));
             dead = ImageIO.read(new File("Resources/Lazarus_squished_strip11"));
         }catch(Exception e){}
-        
+
     }
-    public Lazarus(int x, int y,int speed){
-        super(x,y,speed);
+    public Lazarus(BufferedImage[] img, int x, int y, int speed){
+        super(img,x,y);
         this.lives = 5;
     }
 
