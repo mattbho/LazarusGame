@@ -31,7 +31,7 @@ public class Lazarus extends GameObj{
         }catch(Exception e){}
 
     }
-    public Lazarus(BufferedImage[] img, int x, int y, int speed){
+    public Lazarus(BufferedImage[] img, int x, int y){
         super(img,x,y);
         this.lives = 5;
     }

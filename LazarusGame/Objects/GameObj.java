@@ -47,7 +47,7 @@ public abstract class GameObj implements Observer {
     public int getY(){
         return y;
     }
-    public void setY(){
+    public void setY(int y){
         this.y = y;
         box.y = y;
     }
