@@ -28,7 +28,7 @@ public class LazarusMain{
         f.addWindowListener(new WindowAdapter() {});
         f.getContentPane().add("Center", frame);
         f.pack();
-        f.setSize(new Dimension(640, 480));
+        f.setSize(new Dimension(x, y));
         f.setVisible(true);
         f.setResizable(false);
         
