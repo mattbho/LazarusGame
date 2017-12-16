@@ -18,19 +18,10 @@ import javax.imageio.ImageIO;
  * @author jack
  */
 public class Lazarus extends GameObj{
-    Image moveLeft,moveRight, jumpLeft,jumpRight, dead;
+    //Image moveLeft,moveRight, jumpLeft,jumpRight, dead;
     Boolean left, right;
     int lives;
-    public void init(){
-        try{
-            moveLeft =ImageIO.read(new File("Resource/Lazarus_left_strip7.png"));
-            moveRight = ImageIO.read(new File("Resource/Lazarus_right_strip7.png"));
-            jumpLeft = ImageIO.read(new File("Resource/Lazarus_jump_left_strip7.png"));
-            jumpRight = ImageIO.read(new File("Resource/Lazarus_jump_right_strip7.png"));
-            dead = ImageIO.read(new File("Resources/Lazarus_squished_strip11"));
-        }catch(Exception e){}
 
-    }
     public Lazarus(BufferedImage[] img, int x, int y){
         super(img,x,y);
         this.lives = 5;
