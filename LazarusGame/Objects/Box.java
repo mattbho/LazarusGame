@@ -7,10 +7,10 @@ import java.util.Observable;
 
 public class Box extends GameObj {
     protected int boxX, boxY;
-    char type;
+    int type;
     boolean isFalling;
 
-    public Box(BufferedImage[] img, int x, int y, int speed, char type, boolean isFalling) {
+    public Box(Image img, int x, int y, int speed,int type, boolean isFalling) {
         super(img, x, y);
         this.speed = speed;
         this.type = type;
@@ -33,18 +33,18 @@ public class Box extends GameObj {
         return isFalling;
     }
 
-    public char getType() {
+    public int getType() {
         return type;
     }
     //Public void collision(){}
     //call collision in boxUpdate
     @Override
     public void update(Observable o, Object arg){
-
+        
     }
     public void draw(Graphics g, ImageObserver obs){
         if(visible){
-            g.drawImage(img[frame],x,y,obs);
+            g.drawImage(img,x,y,obs);
             if(isFalling){
                 boxFalling();
             }

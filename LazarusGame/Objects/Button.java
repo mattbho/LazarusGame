@@ -17,7 +17,7 @@ import java.util.Random;
  * @author Jack
  */
 public class Button extends GameObj{
-    public Button(BufferedImage[] img, int x, int y){
+    public Button(Image img, int x, int y){
         super(img,x,y);
     }
     @Override
