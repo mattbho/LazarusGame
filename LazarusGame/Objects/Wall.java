@@ -31,8 +31,8 @@ public class Wall extends GameObj{
     public void draw(ImageObserver obs, Graphics2D g){
         g.drawImage(img, x, y, obs);
     }
-    @Override
-    public void update(Observable o, Object arg){
+
+    public void update(){
         Collision.LazarusvWallCollision();
     }
 }

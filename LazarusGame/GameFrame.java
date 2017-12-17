@@ -40,7 +40,7 @@ public class GameFrame extends JApplet implements Runnable{
     BufferedImage bimg;
     private FileReader lvl1;
     private static ArrayList<Box> boxes = new ArrayList();
-    Random gen = new Random(4);
+    Random gen = new Random();
     private int[] keys = {KeyEvent.VK_SPACE, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT};
     Collision collision = new Collision();
     @Override
@@ -74,6 +74,7 @@ public class GameFrame extends JApplet implements Runnable{
         gameEvents.addObserver(Player);
         Controls key = new Controls(this.gameEvents);
         addKeyListener(key);
+        boxDrop();
         
     }
     public void loadImageStrips(){
@@ -127,11 +128,16 @@ public class GameFrame extends JApplet implements Runnable{
     public void drawDemo(){
         setBackGround(lvl1);
         BackgroundImage();
+        //randomDrop();
         if (!walls.isEmpty()) {
-            for (int i = 0; i <= walls.size() - 1; i++)
+            for (int i = 0; i <walls.size(); i++)
 		(walls.get(i)).draw(this, g2);
         }
-        
+        if(!boxes.isEmpty()){
+            for(int i = 0; i <boxes.size();i++){
+                boxes.get(i).draw(this, g2);
+            }
+        }
 
         //if state = state.game
 
@@ -143,7 +149,8 @@ public class GameFrame extends JApplet implements Runnable{
     }
     
     public void boxDrop(){
-        int x = gen.nextInt(4);
+        int x = gen.nextInt(4)+1;
+        System.out.println(x);
         switch(x){
             case 1:
                 boxes.add(new Box(cardboard, Player.getX()-Player.getX()%40, 0, 5, x, true));
@@ -163,8 +170,9 @@ public class GameFrame extends JApplet implements Runnable{
     }
     public void randomDrop(){
         if (!Player.isSquished()) {
-            if (!boxes.get(boxes.size() - 2).getFalling()) {
-                boxes.get(boxes.size() - 1).setBoxFalling(true);
+            if(!boxes.isEmpty())
+            if (!boxes.get(boxes.size() - 1).getFalling()) {
+                //boxes.get(boxes.size() - 1).setBoxFalling(true);
                 boxDrop();
             }
         }
@@ -180,12 +188,15 @@ public class GameFrame extends JApplet implements Runnable{
         if (bimg == null || bimg.getWidth() != LazarusMain.getX() || bimg.getHeight() != LazarusMain.getY()) {
             bimg = (BufferedImage) createImage(LazarusMain.getX(), LazarusMain.getY());
         }
+        
         g2= bimg.createGraphics();
         drawDemo();
 
         
         collision.BoxvBoxCollision();
         collision.LazarusvWallCollision();
+        collision.BoxvWallCollision();
+        randomDrop();
         Player.draw(this, g2);
         g.drawImage(bimg,0,0,this);
 

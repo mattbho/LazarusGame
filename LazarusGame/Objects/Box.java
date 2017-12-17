@@ -38,13 +38,14 @@ public class Box extends GameObj {
     }
     //Public void collision(){}
     //call collision in boxUpdate
-    @Override
-    public void update(Observable o, Object arg){
-        
+    
+    public void update(){
+        isFalling = false;
+        y = boxY;
     }
-    public void draw(Graphics g, ImageObserver obs){
+    public void draw(ImageObserver obs, Graphics2D g2){
         if(visible){
-            g.drawImage(img,x,y,obs);
+            g2.drawImage(img,x,y,obs);
             if(isFalling){
                 boxFalling();
             }

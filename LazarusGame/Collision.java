@@ -39,17 +39,31 @@ public class Collision {
         }
     }
     
+    public void BoxvWallCollision(){
+        for ( int i = 0; i < GameFrame.getBoxArray().size( ); i++ ) {
+            for ( int j = 0; j < GameFrame.getWallArray().size( ); j++ ) {
+                if (GameFrame.getBoxArray().get( i ).isVisible( ) ) {
+                    if ( GameFrame.getBoxArray().get( i ).getFalling( ) ) {
+                        if ( collision( GameFrame.getBoxArray().get( i ), GameFrame.getWallArray().get( j ), '0') ) {
+                                        //SoundPlayer.AUDIO_PLAYER.play( StaticInfo.WALL_SOUND );
+                            GameFrame.getBoxArray().get( i ).update();                       
+                        }
+                    }
+                }
+            }
+        }
+    }
     
     public void BoxvBoxCollision(){
         for ( int i = 0; i < GameFrame.getBoxArray().size( ); i++ ) {
             for ( int j = 0; j < GameFrame.getBoxArray().size( ); j++ ) {
                 if ( j != i && GameFrame.getBoxArray().get( j ).isVisible( ) ) {
                     if ( GameFrame.getBoxArray().get( i ).getFalling( ) ) {
-                        if ( GameFrame.getBoxArray().get( j ).getType( ) > GameFrame.getBoxArray().get( i ).getType( )) {
-                        if ( collision( GameFrame.getBoxArray().get( i ), GameFrame.getBoxArray().get( j ), '0') ) {
+                        if ( GameFrame.getBoxArray().get( j ).getType( ) >= GameFrame.getBoxArray().get( i ).getType( )) {
+                            if ( collision( GameFrame.getBoxArray().get( i ), GameFrame.getBoxArray().get( j ), '0') ) {
                                         //SoundPlayer.AUDIO_PLAYER.play( StaticInfo.WALL_SOUND );
-                            //GameFrame.getBoxArray().get( i ).update();
-                        }
+                                GameFrame.getBoxArray().get( i ).update();
+                            }
                         }else if ( collision( GameFrame.getBoxArray().get( i ), GameFrame.getBoxArray().get( j ), '~') ) {
                             //SoundPlayer.AUDIO_PLAYER.play( StaticInfo.BOX_CRUSH_SOUND );
                             GameFrame.getBoxArray().get( j ).setVisible( false );                        
