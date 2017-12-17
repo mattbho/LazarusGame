@@ -13,6 +13,7 @@ import java.awt.Rectangle;
  *
  * @author Jack
  */
+/*
 public class Collision {
     Boolean collide;
     public boolean collision(GameObj obj1, GameObj obj2){
@@ -57,3 +58,4 @@ public class Collision {
     
     
 }
+*/

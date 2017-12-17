@@ -14,7 +14,7 @@ public abstract class GameObj implements Observer {
     protected BufferedImage img;
     protected BufferedImage[] imgArray;
     Rectangle box;
-    protected int x, y, speed;
+    protected int x, y, speed, frame = 0;
     protected boolean visible = true;
 
     public GameObj(BufferedImage img, int x, int y){
@@ -37,7 +37,7 @@ public abstract class GameObj implements Observer {
     }
     public void draw(ImageObserver obs, Graphics2D g2){
         if(visible){
-            //g2.drawImage(img[frame],x,y,obs);
+            g2.drawImage(img,x,y,obs);
         }
     }
     public int getX(){

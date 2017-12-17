@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
@@ -32,7 +33,6 @@ public class GameFrame extends JApplet implements Runnable{
     GameEvent gameEvents;
     private static Lazarus Player;
     private BufferedImage afraidStrip, jumpLeftStrip, jumpRightStrip, moveleftStrip, moveRightStrip, squishedStrip,stand;
-
     private BufferedImage cardboard, stone, wood, metal, wall, button, Background;
     private BufferedImage[] afraid, jumpLeft, jumpRight, moveLeft, moveRight, squished;
     Graphics2D g2;
@@ -42,6 +42,7 @@ public class GameFrame extends JApplet implements Runnable{
     private FileReader lvl1;
     private static ArrayList<Box> boxes = new ArrayList();
     Random gen = new Random(4);
+    private int[] keys = {KeyEvent.VK_SPACE, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT};
     
     @Override
     public void init(){
@@ -69,7 +70,7 @@ public class GameFrame extends JApplet implements Runnable{
 
         }catch(Exception e){}  
         
-        Player = new Lazarus(stand,320, 400);
+        Player = new Lazarus(stand, moveLeft,moveRight,jumpLeft,jumpRight,squished,keys,320,360);
 
         gameEvents = new GameEvent();
         gameEvents.addObserver(Player);
