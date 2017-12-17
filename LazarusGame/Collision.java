@@ -7,6 +7,7 @@ package LazarusGame;
 
 
 import LazarusGame.Objects.GameObj;
+import LazarusGame.Objects.Lazarus;
 
 /**
  *
@@ -17,7 +18,6 @@ public class Collision {
     // stop = ~
     // run into = 0
     // squish = 1;
-
     public static boolean collision(GameObj obj1, GameObj obj2, char type){
         if(obj1.getBox().intersects(obj2.getBox())){
             obj1.setCollisionType(type);
@@ -38,7 +38,19 @@ public class Collision {
             }
         }
     }
-    
+    public static void LazarusvBoxCollision(){
+        if ( !GameFrame.getPlayer().isSquished( ) ) {
+            for ( int i = 0; i < GameFrame.getBoxArray().size( ); i++ ) {
+                if (GameFrame.getBoxArray().get( i ).isVisible( ) ) {
+                    if (collision( GameFrame.getPlayer(), GameFrame.getBoxArray().get( i ), '0') ) {
+                        if(GameFrame.getBoxArray().get(i).getFalling())
+                            GameFrame.getPlayer().setSquished(true);
+                        GameFrame.getPlayer().collisionAction( );
+                    }
+                }
+            }
+        }
+    }
     public void BoxvWallCollision(){
         for ( int i = 0; i < GameFrame.getBoxArray().size( ); i++ ) {
             for ( int j = 0; j < GameFrame.getWallArray().size( ); j++ ) {

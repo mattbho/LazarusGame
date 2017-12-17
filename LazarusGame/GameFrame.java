@@ -195,6 +195,7 @@ public class GameFrame extends JApplet implements Runnable{
         
         collision.BoxvBoxCollision();
         collision.LazarusvWallCollision();
+        collision.LazarusvBoxCollision();
         collision.BoxvWallCollision();
         randomDrop();
         Player.draw(this, g2);
