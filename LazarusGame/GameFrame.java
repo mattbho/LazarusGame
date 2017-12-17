@@ -1,6 +1,7 @@
 package LazarusGame;
 
 import LazarusGame.Objects.Box;
+import LazarusGame.Objects.Button;
 import LazarusGame.Objects.Lazarus;
 import LazarusGame.Objects.Wall;
 import java.awt.Color;
@@ -31,18 +32,20 @@ import javax.swing.JApplet;
 public class GameFrame extends JApplet implements Runnable{
     GameEvent gameEvents;
     private static Lazarus Player;
-    private BufferedImage afraidStrip, jumpLeftStrip, jumpRightStrip, moveleftStrip, moveRightStrip, squishedStrip,stand;
-    private BufferedImage cardboard, stone, wood, metal, wall, button, Background;
+    private static BufferedImage afraidStrip, jumpLeftStrip, jumpRightStrip, moveleftStrip, moveRightStrip, squishedStrip,stand;
+    private static BufferedImage cardboard, stone, wood, metal, wall, button, Background;
     private BufferedImage[] afraid, jumpLeft, jumpRight, moveLeft, moveRight, squished;
     Graphics2D g2;
     private static ArrayList<Wall> walls = new ArrayList();
     private Thread thread;
     BufferedImage bimg;
-    private FileReader lvl1;
+    private static Button buttons;
+    private FileReader lvl;
     private static ArrayList<Box> boxes = new ArrayList();
     Random gen = new Random();
     private int[] keys = {KeyEvent.VK_SPACE, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT};
     Collision collision = new Collision();
+    private static int levels=1;
     @Override
     public void init(){
         setBackground(Color.BLACK);
@@ -64,20 +67,19 @@ public class GameFrame extends JApplet implements Runnable{
             wall = ImageIO.read(new File("LazarusGame/Resources/Wall.gif"));
             button = ImageIO.read(new File("LazarusGame/Resources/Button.gif"));
             Background = ImageIO.read(new File("LazarusGame/Resources/Background.bmp"));
-            lvl1=new FileReader("LazarusGame/Resources/level1.txt");
-
+            lvl=new FileReader("LazarusGame/Resources/level"+levels+".txt");
 
         }catch(Exception e){}  
         
-        Player = new Lazarus(stand, moveLeft,moveRight,jumpLeft,jumpRight,squished,keys,320,360);
+        /*Player = new Lazarus(stand, moveLeft,moveRight,jumpLeft,jumpRight,squished,keys,320,360);
         gameEvents = new GameEvent();
         gameEvents.addObserver(Player);
         Controls key = new Controls(this.gameEvents);
         addKeyListener(key);
-        boxDrop();
+        boxDrop();*/
         
     }
-    public void loadImageStrips(){
+    public static void loadImageStrips(){
         try{
 
             afraidStrip = ImageIO.read(new File("LazarusGame/Resources/Lazarus_afraid_strip10.png"));
@@ -114,7 +116,15 @@ public class GameFrame extends JApplet implements Runnable{
                     if(number.charAt(i)=='1')
                         this.walls.add(new Wall(wall, (position % 16) * 40, (position/ 16) * 40));
                     if(number.charAt(i)=='2')
-                        this.walls.add(new Wall(button, (position % 16) * 40, (position/ 16) * 40));
+                        buttons =new Button(button, (position % 16) * 40, (position/ 16) * 40);
+                    if(number.charAt(i) == 'L'){
+                        Player = new Lazarus(stand, moveLeft,moveRight,jumpLeft,jumpRight,squished,keys,(position % 16) * 40, (position/ 16) * 40);
+                        gameEvents = new GameEvent();
+                        gameEvents.addObserver(Player);
+                        Controls key = new Controls(this.gameEvents);
+                        addKeyListener(key);
+                        boxDrop();
+                    }
                     position++;
                 }
             }
@@ -126,9 +136,8 @@ public class GameFrame extends JApplet implements Runnable{
     }
     
     public void drawDemo(){
-        setBackGround(lvl1);
+        setBackGround(lvl);
         BackgroundImage();
-        //randomDrop();
         if (!walls.isEmpty()) {
             for (int i = 0; i <walls.size(); i++)
 		(walls.get(i)).draw(this, g2);
@@ -138,6 +147,7 @@ public class GameFrame extends JApplet implements Runnable{
                 boxes.get(i).draw(this, g2);
             }
         }
+        buttons.draw(this, g2);
 
         //if state = state.game
 
@@ -177,11 +187,28 @@ public class GameFrame extends JApplet implements Runnable{
             }
         }
     }
+    
+    
+    public void levelUp(){
+        levels++;        
+        boxes.clear();
+        walls.clear();
+        try{
+            lvl=new FileReader("LazarusGame/Resources/level"+levels+".txt");
+        }catch(Exception e){}
+        setBackGround(lvl);
+        Player.reset();
+        //reset();
+        
+    }
     public static ArrayList<Box> getBoxArray(){
         return boxes; 
     }
     public static ArrayList<Wall> getWallArray(){
         return walls;
+    }
+    public static Button getButton(){
+        return buttons;
     }
     @Override
     public void paint(Graphics g){
@@ -197,6 +224,7 @@ public class GameFrame extends JApplet implements Runnable{
         collision.LazarusvWallCollision();
         collision.LazarusvBoxCollision();
         collision.BoxvWallCollision();
+        collision.LazarusvButtonCollision();
         randomDrop();
         Player.draw(this, g2);
         g.drawImage(bimg,0,0,this);

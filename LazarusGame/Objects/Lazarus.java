@@ -67,6 +67,9 @@ public class Lazarus extends GameObj {
     public void setGameReset(boolean reset){
         this.gameReset = reset;
     }
+    public void reset(){
+        isSquished = false;
+    }
     public void jumpLeft(){
         direction = '0';
         faceDirection = '0';
