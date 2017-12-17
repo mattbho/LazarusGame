@@ -38,7 +38,7 @@ public class Lazarus extends GameObj {
     private boolean jump = false;
     private boolean isSquished = false;
     private boolean gameReset = false;
-    private char direction = '`', faceDirection = '3';
+    private char direction = '~', faceDirection = '3';
 
     public Lazarus(
             BufferedImage stand,
@@ -130,6 +130,41 @@ public class Lazarus extends GameObj {
         }
     }
     @Override
+    public void collisionAction(){
+      switch(collisionType){
+          case '0':
+              if(falling){
+                  falling = false;
+                  jump = false;
+                  setY(lY);
+              } else if (!jump) {
+                  if (faceDirection == '2') {
+                      box.x -= 40;
+                      box.y -= 40;
+                  } else if (faceDirection == '3') {
+                      box.x += 40;
+                      box.y -= 40;
+                      jump();
+                  }
+              }else if(jump){
+                      jump = false;
+                      wallCollision();
+                  }
+                    break;
+          case '1':
+              setSquished(true);
+          default:
+              break;
+              }
+              collisionType = '~';
+      }
+
+    public void wallCollision(){
+        frame = 0;
+        setX(lX);
+        setY(lY+40);
+    }
+    @Override
    public void update(Observable o, Object arg){
     GameEvent ge = (GameEvent) arg;
     //if state = state.GAME
@@ -155,6 +190,7 @@ public class Lazarus extends GameObj {
                     }
                 }
             }
+
         }
    }
    @Override
@@ -177,7 +213,7 @@ public class Lazarus extends GameObj {
                             frame++;
                         } else{
                             frame = 0;
-                            direction = '`';
+                            direction = '~';
                             setY(y-40);
                             g2.drawImage(stand,x,y,obs);
                             falling = true;
@@ -190,7 +226,7 @@ public class Lazarus extends GameObj {
                             frame++;
                         } else{
                             frame = 0;
-                            direction = '`';
+                            direction = '~';
                             setY(y-40);
                             g2.drawImage(stand,x,y,obs);
                             falling = true;
@@ -203,7 +239,7 @@ public class Lazarus extends GameObj {
                             frame++;
                         } else{
                             frame = 0;
-                            direction = '`';
+                            direction = '~';
                             g2.drawImage(stand,x,y,obs);
                             falling = true;
                         }
@@ -215,7 +251,7 @@ public class Lazarus extends GameObj {
                             frame++;
                         } else{
                             frame = 0;
-                            direction = '`';
+                            direction = '~';
                             g2.drawImage(stand,x,y,obs);
                             falling = true;
                         }

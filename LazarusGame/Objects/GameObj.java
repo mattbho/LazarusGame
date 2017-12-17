@@ -16,7 +16,7 @@ public abstract class GameObj implements Observer {
     Rectangle box;
     protected int x, y, speed, frame = 0;
     protected boolean visible = true;
-
+    protected char collisionType = '~';
     public GameObj(BufferedImage img, int x, int y){
         this.img = img;
         this.x = x;
@@ -54,6 +54,15 @@ public abstract class GameObj implements Observer {
         this.y = y;
         box.y = y;
     }
+    public void setCollisionType(char type){
+        this.collisionType = type;
+    }
+    public void collisionAction(){
+        switch(collisionType){
+            default:
+                break;
+        }
+    }
 
     public int getSpeed(){
         return speed;
@@ -68,4 +77,7 @@ public abstract class GameObj implements Observer {
         this.visible = vision;
     }
 
+    public Rectangle getBox() {
+        return box;
+    }
 }

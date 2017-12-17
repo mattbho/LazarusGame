@@ -6,10 +6,11 @@
 package LazarusGame.Objects;
 
 
-import LazarusGame.GameFrame;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
+import java.util.Observable;
 
 /**
  *
@@ -17,7 +18,6 @@ import java.awt.image.ImageObserver;
  */
 public class Wall extends GameObj{
     private int width, height;
-    
     public Wall(BufferedImage img, int x, int y){
         super(img,x,y);
         this.width = img.getWidth();
@@ -30,19 +30,8 @@ public class Wall extends GameObj{
     public void draw(ImageObserver obs, Graphics2D g){
         g.drawImage(img, x, y, obs);
     }
-    
-    public void update(){
-            /*if ((GameFrame.getPlayer()).collision(this.x, this.y, this.width, this.height)){
-                if(GameFrame.getP1().x>this.x){ 
-                    GameFrame.getP1().x+=3;
-                }else if(GameFrame.getP1().x<this.x){
-                    GameFrame.getP1().x-=3;
-                }
-                if(GameFrame.getP1().y>this.y){
-                    GameFrame.getP1().y+=3;
-                }else if(GameFrame.getP1().y<this.y){
-                    GameFrame.getP1().y-=3;
-                }
-            }*/
+    @Override
+    public void update(Observable o, Object arg){
+
         }
 }

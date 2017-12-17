@@ -6,7 +6,6 @@ import LazarusGame.Objects.Wall;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
@@ -36,7 +35,7 @@ public class GameFrame extends JApplet implements Runnable{
     private BufferedImage cardboard, stone, wood, metal, wall, button, Background;
     private BufferedImage[] afraid, jumpLeft, jumpRight, moveLeft, moveRight, squished;
     Graphics2D g2;
-    private ArrayList<Wall> walls = new ArrayList();
+    private static ArrayList<Wall> walls = new ArrayList();
     private Thread thread;
     BufferedImage bimg;
     private FileReader lvl1;
@@ -71,7 +70,6 @@ public class GameFrame extends JApplet implements Runnable{
         }catch(Exception e){}  
         
         Player = new Lazarus(stand, moveLeft,moveRight,jumpLeft,jumpRight,squished,keys,320,360);
-
         gameEvents = new GameEvent();
         gameEvents.addObserver(Player);
         Controls key = new Controls(this.gameEvents);
@@ -133,7 +131,10 @@ public class GameFrame extends JApplet implements Runnable{
             for (int i = 0; i <= walls.size() - 1; i++)
 		(walls.get(i)).draw(this, g2);
         }
-        Player.draw(this, g2);
+
+        //if state = state.game
+
+
     }
     
     public static Lazarus getPlayer(){
@@ -170,7 +171,9 @@ public class GameFrame extends JApplet implements Runnable{
     public static ArrayList<Box> getBoxArray(){
         return boxes; 
     }
-    
+    public static ArrayList<Wall> getWallArray(){
+        return walls;
+    }
     @Override
     public void paint(Graphics g){
         if (bimg == null || bimg.getWidth() != LazarusMain.getX() || bimg.getHeight() != LazarusMain.getY()) {
@@ -178,7 +181,13 @@ public class GameFrame extends JApplet implements Runnable{
         }
         g2= bimg.createGraphics();
         drawDemo();
+
+        Collision collision = new Collision();
+        collision.BoxvBoxCollision();
+        collision.LazarusvWallCollision();
+        Player.draw(this, g2);
         g.drawImage(bimg,0,0,this);
+
     }
     
     @Override
