@@ -31,40 +31,78 @@ import javax.swing.JApplet;
 public class GameFrame extends JApplet implements Runnable{
     GameEvent gameEvents;
     private static Lazarus Player;
-    Image Background,metal, wood,cardboard,stone, button, wall;
-    Image moveLeft,moveRight, jumpLeft,jumpRight, dead;
+    private BufferedImage afraidStrip, jumpLeftStrip, jumpRightStrip, moveleftStrip, moveRightStrip, squishedStrip,stand;
+
+    private BufferedImage cardboard, stone, wood, metal, wall, button, Background;
+    private BufferedImage[] afraid, jumpLeft, jumpRight, moveLeft, moveRight, squished;
     Graphics2D g2;
     private ArrayList<Wall> walls = new ArrayList();
     private Thread thread;
     BufferedImage bimg;
     private FileReader lvl1;
     private static ArrayList<Box> boxes = new ArrayList();
-    Random gen = new Random(1);
+    Random gen = new Random(4);
     
     @Override
     public void init(){
         setBackground(Color.BLACK);
         this.setFocusable(true);
-        try{            
-            Background = ImageIO.read(new File("LazarusGame/Resources/Background.bmp"));            
+
+        try{
+            loadImageStrips();
+            stand = ImageIO.read(new File("LazarusGame/Resources/Lazarus_stand.png"));
+            afraid = stripSplitter(afraidStrip,40,10);
+            jumpLeft = stripSplitter(jumpLeftStrip,80,7);
+            jumpRight = stripSplitter(jumpRightStrip,80,7);
+            moveLeft = stripSplitter(moveleftStrip,80,7);
+            moveRight = stripSplitter(moveRightStrip,80,7);
+            squished = stripSplitter(squishedStrip,40,11);
             cardboard = ImageIO.read(new File("LazarusGame/Resources/CardBox.gif"));
-            wood = ImageIO.read(new File("LazarusGame/Resources/WoodBox.gif"));
             stone = ImageIO.read(new File("LazarusGame/Resources/StoneBox.gif"));
+            wood = ImageIO.read(new File("LazarusGame/Resources/WoodBox.gif"));
             metal = ImageIO.read(new File("LazarusGame/Resources/MetalBox.gif"));
+            wall = ImageIO.read(new File("LazarusGame/Resources/Wall.gif"));
             button = ImageIO.read(new File("LazarusGame/Resources/Button.gif"));
-            wall = ImageIO.read(new File("LazarusGame/Resources/wall.gif"));
+            Background = ImageIO.read(new File("LazarusGame/Resources/Background.bmp"));
             lvl1=new FileReader("LazarusGame/Resources/level1.txt");
+
+
         }catch(Exception e){}  
         
-        Player=new Lazarus(320, 400);
-        Player.init();
+        Player = new Lazarus(stand,320, 400);
+
         gameEvents = new GameEvent();
         gameEvents.addObserver(Player);
         Controls key = new Controls(this.gameEvents);
         addKeyListener(key);
         
     }
-    
+    public void loadImageStrips(){
+        try{
+
+            afraidStrip = ImageIO.read(new File("LazarusGame/Resources/Lazarus_afraid_strip10.png"));
+            jumpLeftStrip = ImageIO.read(new File("LazarusGame/Resources/Lazarus_jump_left_strip7.png"));
+            jumpRightStrip = ImageIO.read(new File("LazarusGame/Resources/Lazarus_jump_right_strip7.png"));
+            moveleftStrip = ImageIO.read(new File("LazarusGame/Resources/Lazarus_left_strip7.png"));
+            moveRightStrip = ImageIO.read(new File("LazarusGame/Resources/Lazarus_right_strip7.png"));
+            squishedStrip = ImageIO.read(new File("LazarusGame/Resources/Lazarus_squished_strip11.png"));
+
+
+        }catch(Exception e){System.out.println(e.toString());}
+    }
+
+    public BufferedImage[] stripSplitter(BufferedImage img, int imgWidth, int frameNumber){
+        int width = img.getWidth()/frameNumber;
+        int height = img.getHeight();
+        BufferedImage[] splitSprites = new BufferedImage[img.getTileWidth()/imgWidth];
+        int imgDivider = 0;
+        for(int i = 0; i < frameNumber; i++){
+            splitSprites[i] = img.getSubimage(imgDivider,0,width,height);
+            imgDivider += imgWidth;
+        }
+        return splitSprites;
+    }
+
     public void setBackGround(FileReader lvl){
         BufferedReader line = new BufferedReader(lvl);
         String number;

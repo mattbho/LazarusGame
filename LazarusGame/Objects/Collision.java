@@ -14,7 +14,6 @@ import java.awt.Rectangle;
  * @author Jack
  */
 public class Collision {
-    Rectangle box;
     Boolean collide;
     public boolean collision(GameObj obj1, GameObj obj2){
         if(obj1.box.intersects(obj2.box)){
@@ -44,7 +43,7 @@ public class Collision {
                         if ( GameFrame.getBoxArray().get( j ).getType( ) > GameFrame.getBoxArray().get( i ).getType( )) {
                         if ( collision( GameFrame.getBoxArray().get( i ), GameFrame.getBoxArray().get( j )) ) {
                                         //SoundPlayer.AUDIO_PLAYER.play( StaticInfo.WALL_SOUND );
-                            GameFrame.getBoxArray().get( i ).boxUpdate( );
+                            //GameFrame.getBoxArray().get( i ).update();
                         }
                         }else if ( collision( GameFrame.getBoxArray().get( i ), GameFrame.getBoxArray().get( j )) ) {
                             //SoundPlayer.AUDIO_PLAYER.play( StaticInfo.BOX_CRUSH_SOUND );

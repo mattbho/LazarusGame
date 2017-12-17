@@ -8,6 +8,7 @@ package LazarusGame.Objects;
 
 import LazarusGame.GameFrame;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 
 /**
@@ -17,10 +18,10 @@ import java.awt.image.ImageObserver;
 public class Wall extends GameObj{
     private int width, height;
     
-    public Wall(Image img, int x, int y){
+    public Wall(BufferedImage img, int x, int y){
         super(img,x,y);
-        this.width = img.getWidth(null);
-        this.height = img.getHeight(null);
+        this.width = img.getWidth();
+        this.height = img.getHeight();
     }
 
     

@@ -10,12 +10,12 @@ public class Box extends GameObj {
     int type;
     boolean isFalling;
 
-    public Box(Image img, int x, int y, int speed,int type, boolean isFalling) {
+    public Box(BufferedImage img, int x, int y, int speed,int type, boolean isFalling) {
         super(img, x, y);
         this.speed = speed;
         this.type = type;
-        //boxX = x;
-        //boxY = y;
+        boxX = x;
+        boxY = y;
 
         this.isFalling = isFalling;
     }

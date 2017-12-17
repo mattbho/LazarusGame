@@ -9,6 +9,7 @@ import LazarusGame.GameEvent;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
 import java.util.Observable;
@@ -27,25 +28,14 @@ public class Lazarus extends GameObj{
     private Boolean finished=false, falling = false, jump = false;
     private Boolean squished=false, collisionLeft=false, collisionRight=false;
     private int lx,ly;
-    
-    public void init(){
-        try{
-            stand =ImageIO.read(new File("LazarusGame/Resources/Lazarus_stand.png"));
-            moveLeft =ImageIO.read(new File("LazarusGame/Resources/Lazarus_left_strip7.png"));
-            moveRight = ImageIO.read(new File("LazarusGame/Resources/Lazarus_right_strip7.png"));
-            jumpLeft = ImageIO.read(new File("LazarusGame/Resources/Lazarus_jump_left_strip7.png"));
-            jumpRight = ImageIO.read(new File("LazarusGame/Resources/Lazarus_jump_right_strip7.png"));
-            dead = ImageIO.read(new File("LazarusGame/Resourcess/Lazarus_squished_strip11"));
-        }catch(Exception e){}
 
-    }
 
     public Boolean isSquished(){
         return squished;
     }
     
-    public Lazarus(int x, int y){
-        super(x,y);
+    public Lazarus(BufferedImage img, int x, int y){
+        super(img, x,y);
         this.lives = 5;
         count = 0;
         

@@ -11,23 +11,25 @@ import java.util.Random;
 
 public abstract class GameObj implements Observer {
 
-    protected Image img;
+    protected BufferedImage img;
+    protected BufferedImage[] imgArray;
     Rectangle box;
-    protected int x, y, speed, frame = 0;
-    protected boolean visible;
-    //private boolean collide = false;
-    public GameObj(Image img, int x, int y){
+    protected int x, y, speed;
+    protected boolean visible = true;
+
+    public GameObj(BufferedImage img, int x, int y){
         this.img = img;
         this.x = x;
         this.y = y;
-        this.box = new Rectangle(img.getWidth(null), img.getHeight(null));
+        box = new Rectangle(this.img.getWidth(), this.img.getHeight());
     }
 
 
-    public GameObj(int x, int y){
+    public GameObj(BufferedImage[] imgArray, int x, int y){
+        this.imgArray = imgArray;
         this.x = x;
         this.y = y;
-        box = new Rectangle(x,y,40,40);
+        box = new Rectangle(this.imgArray[0].getWidth(), this.imgArray[0].getHeight());
     }
 
     public void update(Observable o, Object arg){
@@ -52,10 +54,10 @@ public abstract class GameObj implements Observer {
         this.y = y;
         box.y = y;
     }
+
     public int getSpeed(){
         return speed;
     }
-
     public void setSpeed(int speed){
         this.speed = speed;
     }
@@ -66,7 +68,4 @@ public abstract class GameObj implements Observer {
         this.visible = vision;
     }
 
-    //public BufferedImage[] getImgArray() {
-      //  return img;
-    //}
 }
