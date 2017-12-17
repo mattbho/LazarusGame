@@ -42,7 +42,7 @@ public class GameFrame extends JApplet implements Runnable{
     private static ArrayList<Box> boxes = new ArrayList();
     Random gen = new Random(4);
     private int[] keys = {KeyEvent.VK_SPACE, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT};
-    
+    Collision collision = new Collision();
     @Override
     public void init(){
         setBackground(Color.BLACK);
@@ -131,6 +131,7 @@ public class GameFrame extends JApplet implements Runnable{
             for (int i = 0; i <= walls.size() - 1; i++)
 		(walls.get(i)).draw(this, g2);
         }
+        
 
         //if state = state.game
 
@@ -182,7 +183,7 @@ public class GameFrame extends JApplet implements Runnable{
         g2= bimg.createGraphics();
         drawDemo();
 
-        Collision collision = new Collision();
+        
         collision.BoxvBoxCollision();
         collision.LazarusvWallCollision();
         Player.draw(this, g2);

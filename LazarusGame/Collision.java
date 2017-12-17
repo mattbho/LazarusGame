@@ -18,7 +18,7 @@ public class Collision {
     // run into = 0
     // squish = 1;
 
-    public boolean collision(GameObj obj1, GameObj obj2, char type){
+    public static boolean collision(GameObj obj1, GameObj obj2, char type){
         if(obj1.getBox().intersects(obj2.getBox())){
             obj1.setCollisionType(type);
             return true;
@@ -27,7 +27,7 @@ public class Collision {
 
     }
     
-    public void LazarusvWallCollision(){
+    public static void LazarusvWallCollision(){
         if ( !GameFrame.getPlayer().isSquished( ) ) {
             for ( int i = 0; i < GameFrame.getWallArray().size( ); i++ ) {
                 if (GameFrame.getWallArray().get( i ).isVisible( ) ) {
@@ -38,6 +38,7 @@ public class Collision {
             }
         }
     }
+    
     
     public void BoxvBoxCollision(){
         for ( int i = 0; i < GameFrame.getBoxArray().size( ); i++ ) {
