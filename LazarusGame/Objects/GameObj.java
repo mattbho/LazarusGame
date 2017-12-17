@@ -21,7 +21,7 @@ public abstract class GameObj implements Observer {
         this.img = img;
         this.x = x;
         this.y = y;
-        box = new Rectangle(this.img.getWidth(), this.img.getHeight());
+        box = new Rectangle(x, y, this.img.getWidth(), this.img.getHeight());
     }
 
 
@@ -29,7 +29,7 @@ public abstract class GameObj implements Observer {
         this.imgArray = imgArray;
         this.x = x;
         this.y = y;
-        box = new Rectangle(this.imgArray[0].getWidth(), this.imgArray[0].getHeight());
+        box = new Rectangle(x,y,this.imgArray[0].getWidth(), this.imgArray[0].getHeight());
     }
 
     public void update(Observable o, Object arg){

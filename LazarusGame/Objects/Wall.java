@@ -7,6 +7,7 @@ package LazarusGame.Objects;
 
 
 
+import LazarusGame.Collision;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
@@ -32,6 +33,6 @@ public class Wall extends GameObj{
     }
     @Override
     public void update(Observable o, Object arg){
-
-        }
+        Collision.LazarusvWallCollision();
+    }
 }

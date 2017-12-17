@@ -5,6 +5,7 @@
  */
 package LazarusGame.Objects;
 
+import LazarusGame.Collision;
 import LazarusGame.GameEvent;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -20,20 +21,10 @@ import javax.imageio.ImageIO;
  * @author jack
  */
 public class Lazarus extends GameObj {
-    /*
-    Image moveLeft, moveRight, jumpLeft, jumpRight, dead, stand;
-    Boolean left = false, right = false;
-    int lives;
-    int delay = 1;
-    int count;
-    private Boolean finished = false, falling = false, jump = false;
-    private Boolean squished = false, collisionLeft = false, collisionRight = false;
-    private int lx, ly;
-*/
     private BufferedImage[] moveLeft, moveRight, jumpLeft, jumpRight, squished;
     private BufferedImage stand;
     private int[] keys;
-    private int lX, lY;
+    private int lX, lY, tempY;
     private boolean falling = false;
     private boolean jump = false;
     private boolean isSquished = false;
@@ -117,8 +108,8 @@ public class Lazarus extends GameObj {
         }
     }
     public void fall(){
-        lY = y;
-        setY(y + 40);
+            tempY = y;
+            setY(y + 40);
     }
     public void jump(){
         jump = true;
@@ -131,32 +122,28 @@ public class Lazarus extends GameObj {
     }
     @Override
     public void collisionAction(){
-      switch(collisionType){
-          case '0':
-              if(falling){
-                  falling = false;
-                  jump = false;
-                  setY(lY);
-              } else if (!jump) {
-                  if (faceDirection == '2') {
-                      box.x -= 40;
-                      box.y -= 40;
-                  } else if (faceDirection == '3') {
-                      box.x += 40;
-                      box.y -= 40;
-                      jump();
-                  }
-              }else if(jump){
-                      jump = false;
-                      wallCollision();
-                  }
-                    break;
-          case '1':
-              setSquished(true);
-          default:
-              break;
-              }
-              collisionType = '~';
+        if(!isSquished){
+            if(falling){
+                falling = false;
+                jump = false;
+                setY(tempY);
+            } else if (!jump) {
+                if (faceDirection == '2') {
+                    box.x -= 40;
+                    box.y -= 40;
+                } else if (faceDirection == '3') {
+                    box.x += 40;
+                    box.y -= 40;
+                    jump();
+                }
+            }else if(jump){
+                jump = false;
+                wallCollision();
+            }
+                   
+        }else{
+            
+        }
       }
 
     public void wallCollision(){
@@ -166,6 +153,7 @@ public class Lazarus extends GameObj {
     }
     @Override
    public void update(Observable o, Object arg){
+       
     GameEvent ge = (GameEvent) arg;
     //if state = state.GAME
         if(ge.getType() == 1){
@@ -260,6 +248,7 @@ public class Lazarus extends GameObj {
                         g2.drawImage(stand,x,y,obs);
                         break;
                 }
+                
                 if(falling){
                     fall();
                 }
