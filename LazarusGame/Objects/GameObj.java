@@ -11,22 +11,23 @@ import java.util.Random;
 
 public abstract class GameObj implements Observer {
 
-    protected BufferedImage[] img;
+    protected Image img;
     Rectangle box;
     protected int x, y, speed, frame = 0;
     protected boolean visible;
     //private boolean collide = false;
-    public GameObj(BufferedImage[] img){
+    public GameObj(Image img, int x, int y){
         this.img = img;
-        this.box = new Rectangle(img[0].getWidth(), img[0].getHeight());
+        this.x = x;
+        this.y = y;
+        this.box = new Rectangle(img.getWidth(null), img.getHeight(null));
     }
 
 
-    public GameObj(BufferedImage[] img, int x, int y){
+    public GameObj(int x, int y){
         this.x = x;
         this.y = y;
-        this.img = img;
-        box = new Rectangle(x,y,img[0].getWidth(), img[0].getHeight());
+        box = new Rectangle(x,y,40,40);
     }
 
     public void update(Observable o, Object arg){
@@ -34,7 +35,7 @@ public abstract class GameObj implements Observer {
     }
     public void draw(ImageObserver obs, Graphics2D g2){
         if(visible){
-            g2.drawImage(img[frame],x,y,obs);
+            //g2.drawImage(img[frame],x,y,obs);
         }
     }
     public int getX(){
@@ -65,7 +66,7 @@ public abstract class GameObj implements Observer {
         this.visible = vision;
     }
 
-    public BufferedImage[] getImgArray() {
-        return img;
-    }
+    //public BufferedImage[] getImgArray() {
+      //  return img;
+    //}
 }
