@@ -131,6 +131,7 @@ public class Lazarus extends GameObj {
                 if (faceDirection == '2') {
                     box.x -= 40;
                     box.y -= 40;
+                    jump();
                 } else if (faceDirection == '3') {
                     box.x += 40;
                     box.y -= 40;
