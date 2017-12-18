@@ -7,6 +7,7 @@ package LazarusGame.Objects;
 
 import LazarusGame.Collision;
 import LazarusGame.GameEvent;
+import LazarusGame.GameFrame;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
@@ -144,7 +145,7 @@ public class Lazarus extends GameObj {
             }
                    
         }else{
-            
+            GameFrame.resetLevel();
         }
       }
 

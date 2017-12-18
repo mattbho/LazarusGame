@@ -46,6 +46,7 @@ public class GameFrame extends JApplet implements Runnable{
     private int[] keys = {KeyEvent.VK_SPACE, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT};
     Collision collision = new Collision();
     private static int levels=1;
+    Controls key;
     @Override
     public void init(){
         setBackground(Color.BLACK);
@@ -119,14 +120,14 @@ public class GameFrame extends JApplet implements Runnable{
                         buttons =new Button(button, (position % 16) * 40, (position/ 16) * 40);
                     if(number.charAt(i) == 'L'){
                         if(levels>1){
-                            init();
+                            
                             gameEvents.deleteObserver(Player);
                             
                         }
                         Player = new Lazarus(stand, moveLeft,moveRight,jumpLeft,jumpRight,squished,keys,(position % 16) * 40, (position/ 16) * 40);
                         //gameEvents = new GameEvent();
                         gameEvents.addObserver(Player);
-                        Controls key = new Controls(this.gameEvents);
+                        key = new Controls(this.gameEvents);
                         if(levels>1)
                             removeKeyListener(key);
                         addKeyListener(key);
@@ -137,7 +138,11 @@ public class GameFrame extends JApplet implements Runnable{
             }
         }catch(Exception e){}
     }
-    
+    public static void resetLevel(){
+        boxes.clear();
+        walls.clear();
+        LazarusMain.main(null);
+    }
     public void BackgroundImage(){  
         g2.drawImage(Background,0,0,this);
     }
@@ -204,7 +209,8 @@ public class GameFrame extends JApplet implements Runnable{
         try{
             lvl=new FileReader("LazarusGame/Resources/level"+levels+".txt");
         }catch(Exception e){}
-        setBackGround(lvl);
+        LazarusMain.main(null);
+        //setBackGround(lvl);
         //Player.reset();
         //reset();
         
