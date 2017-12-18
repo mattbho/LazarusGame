@@ -67,9 +67,7 @@ public class Lazarus extends GameObj {
     public void setGameReset(boolean reset){
         this.gameReset = reset;
     }
-    public void reset(){
-        isSquished = false;
-    }
+    
     public void jumpLeft(){
         direction = '0';
         faceDirection = '0';
@@ -156,16 +154,15 @@ public class Lazarus extends GameObj {
         setY(lY+40);
     }
     @Override
-   public void update(Observable o, Object arg){
-       
-    GameEvent ge = (GameEvent) arg;
+    public void update(Observable o, Object arg){       
+        GameEvent ge = (GameEvent) arg;
     //if state = state.GAME
         if(ge.getType() == 1){
             KeyEvent e = (KeyEvent) ge.getEvent();
             int keyPressed = e.getKeyCode();
             if(keyPressed == this.keys[0]){
                 setGameReset(true);
-            } else if( keyPressed == this.keys[1]){
+            } else if( keyPressed == KeyEvent.VK_LEFT){
                 if(frame == 0 && !falling){
                     if(visible){
                         lX = this.x;

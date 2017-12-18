@@ -30,7 +30,7 @@ import javax.swing.JApplet;
  * @author jack
  */
 public class GameFrame extends JApplet implements Runnable{
-    GameEvent gameEvents;
+    GameEvent gameEvents = new GameEvent();
     private static Lazarus Player;
     private static BufferedImage afraidStrip, jumpLeftStrip, jumpRightStrip, moveleftStrip, moveRightStrip, squishedStrip,stand;
     private static BufferedImage cardboard, stone, wood, metal, wall, button, Background;
@@ -108,7 +108,7 @@ public class GameFrame extends JApplet implements Runnable{
     public void setBackGround(FileReader lvl){
         BufferedReader line = new BufferedReader(lvl);
         String number;
-        
+        //this.setFocusable(true);
         int position=0;
         try{
             while((number = line.readLine()) != null){
@@ -118,10 +118,17 @@ public class GameFrame extends JApplet implements Runnable{
                     if(number.charAt(i)=='2')
                         buttons =new Button(button, (position % 16) * 40, (position/ 16) * 40);
                     if(number.charAt(i) == 'L'){
+                        if(levels>1){
+                            init();
+                            gameEvents.deleteObserver(Player);
+                            
+                        }
                         Player = new Lazarus(stand, moveLeft,moveRight,jumpLeft,jumpRight,squished,keys,(position % 16) * 40, (position/ 16) * 40);
-                        gameEvents = new GameEvent();
+                        //gameEvents = new GameEvent();
                         gameEvents.addObserver(Player);
                         Controls key = new Controls(this.gameEvents);
+                        if(levels>1)
+                            removeKeyListener(key);
                         addKeyListener(key);
                         boxDrop();
                     }
@@ -190,6 +197,7 @@ public class GameFrame extends JApplet implements Runnable{
     
     
     public void levelUp(){
+        
         levels++;        
         boxes.clear();
         walls.clear();
@@ -197,7 +205,7 @@ public class GameFrame extends JApplet implements Runnable{
             lvl=new FileReader("LazarusGame/Resources/level"+levels+".txt");
         }catch(Exception e){}
         setBackGround(lvl);
-        Player.reset();
+        //Player.reset();
         //reset();
         
     }
