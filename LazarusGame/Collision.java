@@ -57,6 +57,7 @@ public class Collision {
         if(!GameFrame.getPlayer().isSquished()){
             if(collision(GameFrame.getPlayer(),GameFrame.getButton())){
                 GameFrame frame = new GameFrame();
+                SoundPlayer.player("LazarusGame/Resources/Button.wav", false);
                 frame.levelUp();
             }
         }

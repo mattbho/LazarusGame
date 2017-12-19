@@ -170,7 +170,7 @@ public class Lazarus extends GameObj {
     @Override
     public void update(Observable o, Object arg){       
         GameEvent ge = (GameEvent) arg;
-    //if state = state.GAME
+        if (GameFrame.getState() == GameFrame.gameState.game){
         if(ge.getType() == 1){
             KeyEvent e = (KeyEvent) ge.getEvent();
             int keyPressed = e.getKeyCode();
@@ -195,7 +195,7 @@ public class Lazarus extends GameObj {
                     }
                 }
             }
-
+        }
         }
    }
    @Override

@@ -84,7 +84,7 @@ public class GameFrame extends JApplet implements Runnable{
         gameEvents.addObserver(Player);
         Controls key = new Controls(this.gameEvents);
         addKeyListener(key);
-        
+        SoundPlayer.player("LazarusGame/Resources/Music.mid", true);
         
     }
     public static void loadImageStrips(){
