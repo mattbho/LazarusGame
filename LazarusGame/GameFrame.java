@@ -201,7 +201,7 @@ public class GameFrame extends JApplet implements Runnable{
     
     public void levelUp(){        
         levels++;      
-        if(levels > 3){
+        if(levels > 4){
             state = gameState.menu;
         }else{            
             boxes.clear();
