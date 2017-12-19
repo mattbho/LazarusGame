@@ -23,7 +23,10 @@ public abstract class GameObj implements Observer {
         this.y = y;
         box = new Rectangle(x, y, this.img.getWidth(), this.img.getHeight());
     }
-
+    public GameObj(BufferedImage img){
+        this.img = img;
+        box = new Rectangle(x, y, this.img.getWidth(), this.img.getHeight());
+    }
 
     public GameObj(BufferedImage[] imgArray, int x, int y){
         this.imgArray = imgArray;

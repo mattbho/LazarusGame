@@ -47,7 +47,7 @@ public class GameFrame extends JApplet implements Runnable{
     Collision collision = new Collision();
     private static int levels=1;
     Controls key;
-    
+    private int x,y;
     public static enum gameState{
         menu,game
     }
@@ -79,12 +79,12 @@ public class GameFrame extends JApplet implements Runnable{
         }catch(Exception e){}  
         menu.Menu();
         addMouseListener(new Mouse());
-        /*Player = new Lazarus(stand, moveLeft,moveRight,jumpLeft,jumpRight,squished,keys,320,360);
+        Player = new Lazarus(stand, moveLeft,moveRight,jumpLeft,jumpRight,squished,keys);
         gameEvents = new GameEvent();
         gameEvents.addObserver(Player);
         Controls key = new Controls(this.gameEvents);
         addKeyListener(key);
-        boxDrop();*/
+        
         
     }
     public static void loadImageStrips(){
@@ -126,18 +126,9 @@ public class GameFrame extends JApplet implements Runnable{
                     if(number.charAt(i)=='2')
                         buttons =new Button(button, (position % 16) * 40, (position/ 16) * 40);
                     if(number.charAt(i) == 'L'){
-                        if(levels>1){
-                            
-                            gameEvents.deleteObserver(Player);
-                            
-                        }
-                        Player = new Lazarus(stand, moveLeft,moveRight,jumpLeft,jumpRight,squished,keys,(position % 16) * 40, (position/ 16) * 40);
-                        //gameEvents = new GameEvent();
-                        gameEvents.addObserver(Player);
-                        key = new Controls(this.gameEvents);
-                        if(levels>1)
-                            removeKeyListener(key);
-                        addKeyListener(key);
+                        x = (position % 16) * 40;
+                        y = (position/ 16) * 40;
+                        Player.setXY(x, y);
                         boxDrop();
                     }
                     position++;
@@ -145,12 +136,13 @@ public class GameFrame extends JApplet implements Runnable{
             }
         }catch(Exception e){}
     }
-    public static void resetLevel(){
+    public void resetLevel(){
+        System.out.println(x +y);
         boxes.clear();
-        walls.clear();
-        LazarusMain.main(null);
-        
-        
+        Player.setSquished(false);
+        Player.setVisible(true);
+        Player.resetPosition();
+        boxDrop();        
     }
     public void BackgroundImage(){  
         g2.drawImage(Background,0,0,this);
@@ -159,17 +151,17 @@ public class GameFrame extends JApplet implements Runnable{
     public void drawDemo(){
         BackgroundImage();
         if(state == gameState.game){
-        setBackGround(lvl);
-        if (!walls.isEmpty()) {
-            for (int i = 0; i <walls.size(); i++)
-		(walls.get(i)).draw(this, g2);
-        }
-        if(!boxes.isEmpty()){
-            for(int i = 0; i <boxes.size();i++){
-                boxes.get(i).draw(this, g2);
+            setBackGround(lvl);
+            if (!walls.isEmpty()) {
+                for (int i = 0; i <walls.size(); i++)
+                	(walls.get(i)).draw(this, g2);
             }
-        }
-        buttons.draw(this, g2);
+            if(!boxes.isEmpty()){
+                for(int i = 0; i <boxes.size();i++){
+                    boxes.get(i).draw(this, g2);
+                }
+            }
+            buttons.draw(this, g2);
         }
 
     }
@@ -203,7 +195,6 @@ public class GameFrame extends JApplet implements Runnable{
         if (!Player.isSquished()) {
             if(!boxes.isEmpty())
             if (!boxes.get(boxes.size() - 1).getFalling()) {
-                //boxes.get(boxes.size() - 1).setBoxFalling(true);
                 boxDrop();
             }
         }
@@ -214,16 +205,14 @@ public class GameFrame extends JApplet implements Runnable{
         levels++;      
         if(levels > 3){
             state = gameState.menu;
-        }else{
-        boxes.clear();
-        walls.clear();
+        }else{            
+            boxes.clear();
+            walls.clear();
         try{
             lvl=new FileReader("LazarusGame/Resources/level"+levels+".txt");
         }catch(Exception e){}
-        LazarusMain.main(null);
-        //setBackGround(lvl);
-        //Player.reset();
-        //reset();
+        setBackGround(lvl);
+        resetLevel();
         }
         
     }

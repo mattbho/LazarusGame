@@ -8,6 +8,7 @@ package LazarusGame.Objects;
 import LazarusGame.Collision;
 import LazarusGame.GameEvent;
 import LazarusGame.GameFrame;
+import LazarusGame.SoundPlayer;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
@@ -31,7 +32,9 @@ public class Lazarus extends GameObj {
     private boolean isSquished = false;
     private boolean gameReset = false;
     private char direction = '~', faceDirection = '3';
-
+    private int oX, oY;
+    GameFrame frames = new GameFrame();
+    Thread thread;
     public Lazarus(
             BufferedImage stand,
             BufferedImage[] moveLeft,
@@ -39,12 +42,11 @@ public class Lazarus extends GameObj {
             BufferedImage[] jumpLeft,
             BufferedImage[] jumpRight,
             BufferedImage[] squished,
-            int[] keys,
-            int x,
-            int y)
+            int[] keys)
     {
-        super(stand, x, y);
+        super(stand);
         speed = 5;
+        
         this.moveLeft = moveLeft;
         this.moveRight = moveRight;
         this.jumpLeft = jumpLeft;
@@ -53,7 +55,16 @@ public class Lazarus extends GameObj {
         this.stand = stand;
         this.keys = keys;
     }
-
+    public void setXY(int x,int y){
+        setX(x);
+        setY(y);
+        oX =x;
+        oY =y;
+    }
+    public void resetPosition(){
+        setX(oX);
+        setY(oY);
+    }
     public boolean isSquished() {
         return isSquished;
     }
@@ -144,9 +155,11 @@ public class Lazarus extends GameObj {
                 wallCollision();
             }
                    
-        }else{
-            GameFrame.resetLevel();
         }
+            
+            
+            
+        
       }
 
     public void wallCollision(){
@@ -166,6 +179,7 @@ public class Lazarus extends GameObj {
             } else if( keyPressed == KeyEvent.VK_LEFT){
                 if(frame == 0 && !falling){
                     if(visible){
+                        SoundPlayer.player("LazarusGame/Resources/Move.wav", false);
                         lX = this.x;
                         lY = this.y;
                         moveLeft();
@@ -174,6 +188,7 @@ public class Lazarus extends GameObj {
             } else if(keyPressed == this.keys[2]){
                 if(frame == 0 && !falling){
                     if(visible){
+                        SoundPlayer.player("LazarusGame/Resources/Move.wav", false);
                         lX = this.x;
                         lY = this.y;
                         moveRight();
@@ -193,6 +208,10 @@ public class Lazarus extends GameObj {
                 } else{
                     frame = 0;
                     setVisible(false);
+                    try{
+                        thread.sleep(600);
+                    }catch(Exception e){}
+                    frames.resetLevel();
                 }
             } else {
                 switch(direction){

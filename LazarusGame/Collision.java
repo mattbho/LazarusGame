@@ -7,7 +7,6 @@ package LazarusGame;
 
 
 import LazarusGame.Objects.GameObj;
-import LazarusGame.Objects.Lazarus;
 
 /**
  *
@@ -44,8 +43,10 @@ public class Collision {
             for ( int i = 0; i < GameFrame.getBoxArray().size( ); i++ ) {
                 if (GameFrame.getBoxArray().get( i ).isVisible( ) ) {
                     if (collision( GameFrame.getPlayer(), GameFrame.getBoxArray().get( i )) ) {
-                        if(GameFrame.getBoxArray().get(i).getFalling())
+                        if(GameFrame.getBoxArray().get(i).getFalling()){
                             GameFrame.getPlayer().setSquished(true);
+                            SoundPlayer.player("LazarusGame/Resources/Squished.wav", false);
+                        }
                         GameFrame.getPlayer().collisionAction( );
                     }
                 }
