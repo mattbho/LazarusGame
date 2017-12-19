@@ -1,5 +1,6 @@
 package LazarusGame.Objects;
 
+import LazarusGame.SoundPlayer;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
@@ -48,6 +49,7 @@ public class Box extends GameObj {
             g2.drawImage(img,x,y,obs);
             if(isFalling){
                 boxFalling();
+            }else{
             }
         }
     }

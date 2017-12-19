@@ -30,7 +30,7 @@ import javax.swing.JApplet;
  * @author jack
  */
 public class GameFrame extends JApplet implements Runnable{
-    GameEvent gameEvents = new GameEvent();
+    GameEvent gameEvents;
     private static Lazarus Player;
     private static BufferedImage afraidStrip, jumpLeftStrip, jumpRightStrip, moveleftStrip, moveRightStrip, squishedStrip,stand;
     private static BufferedImage cardboard, stone, wood, metal, wall, button, Background;
@@ -116,7 +116,6 @@ public class GameFrame extends JApplet implements Runnable{
     public void setBackGround(FileReader lvl){
         BufferedReader line = new BufferedReader(lvl);
         String number;
-        //this.setFocusable(true);
         int position=0;
         try{
             while((number = line.readLine()) != null){

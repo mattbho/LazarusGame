@@ -68,7 +68,7 @@ public class Collision {
                 if (GameFrame.getBoxArray().get( i ).isVisible( ) ) {
                     if ( GameFrame.getBoxArray().get( i ).getFalling( ) ) {
                         if ( collision( GameFrame.getBoxArray().get( i ), GameFrame.getWallArray().get( j )) ) {
-                                        //SoundPlayer.AUDIO_PLAYER.play( StaticInfo.WALL_SOUND );
+                            SoundPlayer.player("LazarusGame/Resources/Wall.wav", false);
                             GameFrame.getBoxArray().get( i ).update();                       
                         }
                     }
@@ -84,11 +84,11 @@ public class Collision {
                     if ( GameFrame.getBoxArray().get( i ).getFalling( ) ) {
                         if ( GameFrame.getBoxArray().get( j ).getType( ) >= GameFrame.getBoxArray().get( i ).getType( )) {
                             if ( collision( GameFrame.getBoxArray().get( i ), GameFrame.getBoxArray().get( j )) ) {
-                                        //SoundPlayer.AUDIO_PLAYER.play( StaticInfo.WALL_SOUND );
+                                SoundPlayer.player("LazarusGame/Resources/Wall.wav", false);
                                 GameFrame.getBoxArray().get( i ).update();
                             }
                         }else if ( collision( GameFrame.getBoxArray().get( i ), GameFrame.getBoxArray().get( j ))) {
-                            //SoundPlayer.AUDIO_PLAYER.play( StaticInfo.BOX_CRUSH_SOUND );
+                            SoundPlayer.player("LazarusGame/Resources/Crush.wav", false);
                             GameFrame.getBoxArray().get( j ).setVisible( false );                        
                         }
                     }
