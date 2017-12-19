@@ -33,6 +33,6 @@ public class Wall extends GameObj{
     }
 
     public void update(){
-        Collision.LazarusvWallCollision();
+        
     }
 }

@@ -47,6 +47,12 @@ public class GameFrame extends JApplet implements Runnable{
     Collision collision = new Collision();
     private static int levels=1;
     Controls key;
+    
+    public static enum gameState{
+        menu,game
+    }
+    private static gameState state = gameState.menu;
+    StartMenu menu = new StartMenu();
     @Override
     public void init(){
         setBackground(Color.BLACK);
@@ -71,7 +77,8 @@ public class GameFrame extends JApplet implements Runnable{
             lvl=new FileReader("LazarusGame/Resources/level"+levels+".txt");
 
         }catch(Exception e){}  
-        
+        menu.Menu();
+        addMouseListener(new Mouse());
         /*Player = new Lazarus(stand, moveLeft,moveRight,jumpLeft,jumpRight,squished,keys,320,360);
         gameEvents = new GameEvent();
         gameEvents.addObserver(Player);
@@ -142,14 +149,17 @@ public class GameFrame extends JApplet implements Runnable{
         boxes.clear();
         walls.clear();
         LazarusMain.main(null);
+        
+        
     }
     public void BackgroundImage(){  
         g2.drawImage(Background,0,0,this);
     }
     
     public void drawDemo(){
-        setBackGround(lvl);
         BackgroundImage();
+        if(state == gameState.game){
+        setBackGround(lvl);
         if (!walls.isEmpty()) {
             for (int i = 0; i <walls.size(); i++)
 		(walls.get(i)).draw(this, g2);
@@ -160,15 +170,14 @@ public class GameFrame extends JApplet implements Runnable{
             }
         }
         buttons.draw(this, g2);
-
-        //if state = state.game
-
+        }
 
     }
     
     public static Lazarus getPlayer(){
         return Player;
     }
+    
     
     public void boxDrop(){
         int x = gen.nextInt(4)+1;
@@ -201,9 +210,11 @@ public class GameFrame extends JApplet implements Runnable{
     }
     
     
-    public void levelUp(){
-        
-        levels++;        
+    public void levelUp(){        
+        levels++;      
+        if(levels > 3){
+            state = gameState.menu;
+        }else{
         boxes.clear();
         walls.clear();
         try{
@@ -213,6 +224,7 @@ public class GameFrame extends JApplet implements Runnable{
         //setBackGround(lvl);
         //Player.reset();
         //reset();
+        }
         
     }
     public static ArrayList<Box> getBoxArray(){
@@ -224,6 +236,12 @@ public class GameFrame extends JApplet implements Runnable{
     public static Button getButton(){
         return buttons;
     }
+    public static gameState getState(){
+        return state;
+    }
+    public static void setState(gameState temp){
+        state = temp;
+    }
     @Override
     public void paint(Graphics g){
         if (bimg == null || bimg.getWidth() != LazarusMain.getX() || bimg.getHeight() != LazarusMain.getY()) {
@@ -232,15 +250,18 @@ public class GameFrame extends JApplet implements Runnable{
         
         g2= bimg.createGraphics();
         drawDemo();
-
         
-        collision.BoxvBoxCollision();
-        collision.LazarusvWallCollision();
-        collision.LazarusvBoxCollision();
-        collision.BoxvWallCollision();
-        collision.LazarusvButtonCollision();
-        randomDrop();
-        Player.draw(this, g2);
+        if(state == gameState.menu){     
+            menu.draw(this, g2);
+        }else if(state == gameState.game){
+            collision.BoxvBoxCollision();
+            collision.LazarusvWallCollision();
+            collision.LazarusvBoxCollision();
+            collision.BoxvWallCollision();
+            collision.LazarusvButtonCollision();
+            randomDrop();
+            Player.draw(this, g2);
+        }
         g.drawImage(bimg,0,0,this);
 
     }
@@ -255,9 +276,9 @@ public class GameFrame extends JApplet implements Runnable{
     @Override
     public void run() {
         Thread me = Thread.currentThread();
-        while (thread == me) {
-            repaint();  
-          try {
+        while (thread == me){
+            repaint();
+            try {
                 thread.sleep(25);
             } catch (InterruptedException e) {
                 break;

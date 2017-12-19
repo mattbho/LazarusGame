@@ -28,7 +28,7 @@ public class Collision {
 
     }
     
-    public static void LazarusvWallCollision(){
+    public void LazarusvWallCollision(){
         if ( !GameFrame.getPlayer().isSquished( ) ) {
             for ( int i = 0; i < GameFrame.getWallArray().size( ); i++ ) {
                 if (GameFrame.getWallArray().get( i ).isVisible( ) ) {
@@ -39,7 +39,7 @@ public class Collision {
             }
         }
     }
-    public static void LazarusvBoxCollision(){
+    public void LazarusvBoxCollision(){
         if ( !GameFrame.getPlayer().isSquished( ) ) {
             for ( int i = 0; i < GameFrame.getBoxArray().size( ); i++ ) {
                 if (GameFrame.getBoxArray().get( i ).isVisible( ) ) {
@@ -52,7 +52,7 @@ public class Collision {
             }
         }
     }
-    public static void LazarusvButtonCollision(){
+    public void LazarusvButtonCollision(){
         if(!GameFrame.getPlayer().isSquished()){
             if(collision(GameFrame.getPlayer(),GameFrame.getButton())){
                 GameFrame frame = new GameFrame();
