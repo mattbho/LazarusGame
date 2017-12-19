@@ -137,7 +137,6 @@ public class GameFrame extends JApplet implements Runnable{
         }catch(Exception e){}
     }
     public void resetLevel(){
-        System.out.println(x +y);
         boxes.clear();
         Player.setSquished(false);
         Player.setVisible(true);
@@ -173,7 +172,6 @@ public class GameFrame extends JApplet implements Runnable{
     
     public void boxDrop(){
         int x = gen.nextInt(4)+1;
-        System.out.println(x);
         switch(x){
             case 1:
                 boxes.add(new Box(cardboard, Player.getX()-Player.getX()%40, 0, 5, x, true));
