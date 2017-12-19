@@ -34,15 +34,10 @@ public class StartMenu{
         g2.setFont(new Font("arial", Font.BOLD, 30));
         g2.drawString("START", LazarusMain.getX()/2-50, 335);
         
-        g2.drawString("\u2190", 615, 635);
-        g2.drawRect(655, 600, 50, 50);
-        g2.drawString("\u2193", 670, 635);
-        g2.drawRect(710, 600, 50, 50);
-        g2.drawString("\u2192", 725, 635);
-        g2.drawRect(655, 545, 50, 50);
-        g2.drawString("\u2191", 670, 580);
-        g2.drawRect(635, 675, 105, 50);
-        g2.drawString("PG DN", 640, 710);
+        g2.drawString("\u2190", LazarusMain.getX()/2-45, 400);
+        g2.drawRect(LazarusMain.getX()/2-55, 365, 50, 50);
+        g2.drawRect(LazarusMain.getX()/2+5, 365, 50, 50);
+        g2.drawString("\u2192", LazarusMain.getX()/2+15, 400);
     }
 
 }
