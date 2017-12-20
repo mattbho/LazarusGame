@@ -34,6 +34,8 @@ public class StartMenu{
         g2.drawRect(LazarusMain.getX()/2-55, 365, 50, 50);
         g2.drawRect(LazarusMain.getX()/2+5, 365, 50, 50);
         g2.drawString("\u2192", LazarusMain.getX()/2+15, 400);
+        g2.drawString("Space Bar", LazarusMain.getX()/2+100, 400);
+        g2.drawRect(LazarusMain.getX()/2+100, 365, 150, 50);
     }
 
 }
