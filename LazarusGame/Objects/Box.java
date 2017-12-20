@@ -42,14 +42,13 @@ public class Box extends GameObj {
     
     public void update(){
         isFalling = false;
-        y = boxY;
+        setY(boxY);
     }
     public void draw(ImageObserver obs, Graphics2D g2){
         if(visible){
             g2.drawImage(img,x,y,obs);
             if(isFalling){
                 boxFalling();
-            }else{
             }
         }
     }

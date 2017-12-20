@@ -6,14 +6,10 @@
 package LazarusGame;
 
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
-import java.util.Observable;
-import java.util.Observer;
 import javax.imageio.ImageIO;
 
 /**
@@ -33,7 +29,7 @@ public class StartMenu{
         g2.drawRect(LazarusMain.getX()/2-100, 300, 200, 50);
         g2.setFont(new Font("arial", Font.BOLD, 30));
         g2.drawString("START", LazarusMain.getX()/2-50, 335);
-        
+        g2.drawString("CONTROLS :", 80, 400);
         g2.drawString("\u2190", LazarusMain.getX()/2-45, 400);
         g2.drawRect(LazarusMain.getX()/2-55, 365, 50, 50);
         g2.drawRect(LazarusMain.getX()/2+5, 365, 50, 50);

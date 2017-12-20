@@ -1,13 +1,10 @@
 package LazarusGame.Objects;
 
-
-import LazarusGame.LazarusMain;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Random;
 
 public abstract class GameObj implements Observer {
 
@@ -57,16 +54,7 @@ public abstract class GameObj implements Observer {
         this.y = y;
         box.y = y;
     }
-    public void setCollisionType(char type){
-        this.collisionType = type;
-    }
-    public void collisionAction(){
-        switch(collisionType){
-            default:
-                break;
-        }
-    }
-
+   
     public int getSpeed(){
         return speed;
     }

@@ -5,18 +5,14 @@
  */
 package LazarusGame.Objects;
 
-import LazarusGame.Collision;
 import LazarusGame.GameEvent;
 import LazarusGame.GameFrame;
 import LazarusGame.SoundPlayer;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
-import java.io.File;
 import java.util.Observable;
-import javax.imageio.ImageIO;
 
 /**
  *
@@ -30,7 +26,6 @@ public class Lazarus extends GameObj {
     private boolean falling = false;
     private boolean jump = false;
     private boolean isSquished = false;
-    private boolean gameReset = false;
     private char direction = '~', faceDirection = '3';
     private int oX, oY;
     GameFrame frames = new GameFrame();
@@ -71,13 +66,6 @@ public class Lazarus extends GameObj {
 
     public void setSquished(boolean squished){
         isSquished = squished;
-    }
-
-    public boolean isGameReset() {
-        return gameReset;
-    }
-    public void setGameReset(boolean reset){
-        this.gameReset = reset;
     }
     
     public void jumpLeft(){
@@ -133,7 +121,6 @@ public class Lazarus extends GameObj {
             jumpRight();
         }
     }
-    @Override
     public void collisionAction(){
         if(!isSquished){
             if(falling){
@@ -171,34 +158,35 @@ public class Lazarus extends GameObj {
     public void update(Observable o, Object arg){       
         GameEvent ge = (GameEvent) arg;
         if (GameFrame.getState() == GameFrame.gameState.game){
-        if(ge.getType() == 1){
-            KeyEvent e = (KeyEvent) ge.getEvent();
-            int keyPressed = e.getKeyCode();
-            if(keyPressed == this.keys[0]){
-                setGameReset(true);
-            } else if( keyPressed == KeyEvent.VK_LEFT){
-                if(frame == 0 && !falling){
-                    if(visible){
-                        SoundPlayer.player("LazarusGame/Resources/Move.wav", false);
-                        lX = this.x;
-                        lY = this.y;
-                        moveLeft();
+            if(ge.getType() == 1){
+                KeyEvent e = (KeyEvent) ge.getEvent();
+                int keyPressed = e.getKeyCode();
+                if(keyPressed == this.keys[0]){
+                    GameFrame frame = new GameFrame();
+                    frame.resetLevel();
+                } else if( keyPressed == KeyEvent.VK_LEFT){
+                    if(frame == 0 && !falling){
+                        if(visible){
+                            SoundPlayer.player("LazarusGame/Resources/Move.wav", false);
+                            lX = this.x;
+                            lY = this.y;
+                            moveLeft();
+                        }
                     }
-                }
-            } else if(keyPressed == this.keys[2]){
-                if(frame == 0 && !falling){
-                    if(visible){
-                        SoundPlayer.player("LazarusGame/Resources/Move.wav", false);
-                        lX = this.x;
-                        lY = this.y;
-                        moveRight();
+                } else if(keyPressed == this.keys[2]){
+                    if(frame == 0 && !falling){
+                        if(visible){
+                            SoundPlayer.player("LazarusGame/Resources/Move.wav", false);
+                            lX = this.x;
+                            lY = this.y;
+                            moveRight();
+                        }
                     }
                 }
             }
         }
-        }
-   }
-   @Override
+    }
+    @Override
     public void draw(ImageObserver obs, Graphics2D g2){
         if(visible){
             if(isSquished){
@@ -275,7 +263,5 @@ public class Lazarus extends GameObj {
                 }
             }
         }
-   }
-
-
+    }
 }

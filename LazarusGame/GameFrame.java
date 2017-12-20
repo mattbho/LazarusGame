@@ -34,7 +34,7 @@ public class GameFrame extends JApplet implements Runnable{
     private static Lazarus Player;
     private static BufferedImage afraidStrip, jumpLeftStrip, jumpRightStrip, moveleftStrip, moveRightStrip, squishedStrip,stand;
     private static BufferedImage cardboard, stone, wood, metal, wall, button, Background;
-    private BufferedImage[] afraid, jumpLeft, jumpRight, moveLeft, moveRight, squished;
+    private BufferedImage[]  jumpLeft, jumpRight, moveLeft, moveRight, squished;
     Graphics2D g2;
     private static ArrayList<Wall> walls = new ArrayList();
     private Thread thread;
@@ -61,7 +61,6 @@ public class GameFrame extends JApplet implements Runnable{
         try{
             loadImageStrips();
             stand = ImageIO.read(new File("LazarusGame/Resources/Lazarus_stand.png"));
-            afraid = stripSplitter(afraidStrip,40,10);
             jumpLeft = stripSplitter(jumpLeftStrip,80,7);
             jumpRight = stripSplitter(jumpRightStrip,80,7);
             moveLeft = stripSplitter(moveleftStrip,80,7);
@@ -89,14 +88,11 @@ public class GameFrame extends JApplet implements Runnable{
     }
     public static void loadImageStrips(){
         try{
-
-            afraidStrip = ImageIO.read(new File("LazarusGame/Resources/Lazarus_afraid_strip10.png"));
             jumpLeftStrip = ImageIO.read(new File("LazarusGame/Resources/Lazarus_jump_left_strip7.png"));
             jumpRightStrip = ImageIO.read(new File("LazarusGame/Resources/Lazarus_jump_right_strip7.png"));
             moveleftStrip = ImageIO.read(new File("LazarusGame/Resources/Lazarus_left_strip7.png"));
             moveRightStrip = ImageIO.read(new File("LazarusGame/Resources/Lazarus_right_strip7.png"));
             squishedStrip = ImageIO.read(new File("LazarusGame/Resources/Lazarus_squished_strip11.png"));
-
 
         }catch(Exception e){System.out.println(e.toString());}
     }

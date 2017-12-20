@@ -8,9 +8,7 @@ package LazarusGame.Objects;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
 import java.util.Observable;
-import java.util.Random;
 
 /**
  *
@@ -19,9 +17,5 @@ import java.util.Random;
 public class Button extends GameObj{
     public Button(BufferedImage img, int x, int y){
         super(img,x,y);
-    }
-    @Override
-    public void update(Observable o, Object arg){
-
     }
 }

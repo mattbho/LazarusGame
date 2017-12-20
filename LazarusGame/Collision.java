@@ -14,13 +14,9 @@ import LazarusGame.Objects.GameObj;
  */
 
 public class Collision {
-    // stop = ~
-    // run into = 0
-    // squish = 1;
     
     public static boolean collision(GameObj obj1, GameObj obj2){
         if(obj1.getBox().intersects(obj2.getBox())){
-            //obj1.setCollisionType(type);
             return true;
         }else
             return false;
