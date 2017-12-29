@@ -1,1 +1,1 @@
-Game Development by Matt Ho and Jack Li
+Game Development
