@@ -9,10 +9,7 @@ package LazarusGame;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-/**
- *
- * @author Jack
- */
+
 public class Mouse implements MouseListener{
 
     @Override

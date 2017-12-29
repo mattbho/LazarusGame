@@ -23,12 +23,7 @@ import javax.swing.JApplet;
  * and open the template in the editor.
  */
 
-/**
- *electron 
- * dipole
- * 
- * @author jack
- */
+
 public class GameFrame extends JApplet implements Runnable{
     GameEvent gameEvents;
     private static Lazarus Player;

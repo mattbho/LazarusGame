@@ -10,10 +10,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.util.Observable;
 
-/**
- *
- * @author Jack
- */
+
 public class Button extends GameObj{
     public Button(BufferedImage img, int x, int y){
         super(img,x,y);

@@ -6,10 +6,7 @@
 package LazarusGame;
 import java.awt.event.KeyEvent;
 import java.util.Observable;
-/**
- *
- * @author jack
- */
+
 public class GameEvent extends Observable {
     int type;
     Object event;

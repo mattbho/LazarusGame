@@ -7,10 +7,7 @@ package LazarusGame.Objects;
 
 import java.awt.image.BufferedImage;
 
-/**
- *
- * @author jack
- */
+
 public class Wall extends GameObj{
     public Wall(BufferedImage img, int x, int y){
         super(img,x,y);

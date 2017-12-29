@@ -8,10 +8,7 @@ package LazarusGame;
 
 import LazarusGame.Objects.GameObj;
 
-/**
- *
- * @author Jack
- */
+
 
 public class Collision {
     

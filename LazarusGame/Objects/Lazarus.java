@@ -14,10 +14,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.util.Observable;
 
-/**
- *
- * @author jack
- */
+
 public class Lazarus extends GameObj {
     private BufferedImage[] moveLeft, moveRight, jumpLeft, jumpRight, squished;
     private BufferedImage stand;

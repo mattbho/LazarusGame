@@ -11,10 +11,7 @@ import javax.swing.JFrame;
  * and open the template in the editor.
  */
 
-/**
- *
- * @author Jack
- */
+
 public class LazarusMain{
     private static final int x =640;
     private static final int y =480;
